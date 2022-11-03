@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<menuitem name="GOSI" id="gosi_main_menu" sequence="70" groups="hr.group_hr_user"
+parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"/>
+ <!-- GOSI Menu-->
+    <menuitem id="menu_hr_gosi" parent="gosi_main_menu"
+              action="hr_employee_gosi.action_hr_gosi_view" sequence="1" groups="hr.group_hr_user"/>
+    <menuitem
+            id="gosi_rule_menu"
+            name="GOSI Rules"
+            parent="gosi_main_menu"
+            action="hr_employee_gosi.action_gosi_rules"
+            sequence="2"/>
+    </data>
+</odoo>

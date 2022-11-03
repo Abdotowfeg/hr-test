@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Contract View -->
+        <record id="hr_contract_form_additional_allowance" model="ir.ui.view">
+            <field name="name">hr.contract.view.additional.allowance</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='salary']" position="after">
+                    <group string="Monthly Advantages in Cash" name='allowances'>
+                        <label for="hra"/>
+                        <div class="o_row">
+                            <field name="hra" nolabel="1"/>
+                            <span>/ month</span>
+                        </div>
+                        <label for="transport_allowance"/>
+                        <div class="o_row">
+
+                            <field name="transport_allowance" nolabel="1"/>
+                            <span>/ month</span>
+                        </div>
+                        <label for="other_allowance"/>
+                        <div class="o_row">
+
+                            <field name="other_allowance" nolabel="1"/>
+                            <span>/ month</span>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Payslip View -->
+        <record id="payroll_extension_inherit_view_hr_payslip_form" model="ir.ui.view">
+            <field name="name">payroll.extension.inherit.hr.payslip.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_payslip_done']" position="replace">
+                    <button string="Confirm" name="action_confirm" type="object" states="verify" class="oe_highlight"
+                            groups="hr.group_hr_user"/>
+                </xpath>
+                <xpath expr="//button[@name='action_print_payslip']" position="before">
+                    <button string="Approve" name="action_approve" type="object" states="confirm" class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+                    <button string="Post" name="action_post" type="object" states="approve" class="oe_highlight"
+                            groups="account.group_account_invoice"/>
+                </xpath>
+                <xpath expr="//button[@name='action_payslip_paid']" position="replace">
+                    <button string="Register Payment" name="action_register_payment" type="object" states="done"
+                            class="oe_highlight"
+                            groups="account.group_account_invoice"/>
+                </xpath>
+                <xpath expr="//button[@name='action_payslip_cancel']" position="replace">
+
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button string="Cancel" name="action_payslip_cancel" type="object"
+                            states="draft,verify,confirm,approve" groups="hr.group_hr_manager"/>
+                    <button string="Refuse" name="action_refuse" type="object" states="draft,verify,confirm,approve"
+                            groups="hr.group_hr_manager"/>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,verify,confirm,approve,done,paid,cancel,refuse"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Payslip Batch View -->
+        <record id="payroll_extension_inherit_view_hr_payslip_run_form" model="ir.ui.view">
+            <field name="name">payroll.extension.inherit.hr.payslip.run.form</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_validate']" position="replace">
+                    <button string="Confirm" name="action_confirm" type="object" states="verify" class="oe_highlight"
+                            groups="hr.group_hr_user"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_draft']" position="replace">
+                    <button string="Set to Draft" name="action_draft" type="object" states="cancel"/>
+                </xpath>
+
+                <xpath expr="//header" position="inside">
+                    <button string="Approve" name="action_approve" type="object" states="confirm" class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+                    <button string="Post" name="action_post" type="object" states="approve" class="oe_highlight"
+                            groups="account.group_account_invoice"/>
+                    <button string="Register Payment" name="action_register_payment" type="object" states="done"
+                            class="oe_highlight"
+                            groups="account.group_account_invoice"/>
+                    <button string="Cancel" name="action_cancel" type="object"
+                            states="draft,verify,confirm,approve" groups="hr.group_hr_manager"/>
+                    <button string="Refuse" name="action_refuse" type="object" states="draft,verify,confirm,approve"
+                            groups="hr.group_hr_manager"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

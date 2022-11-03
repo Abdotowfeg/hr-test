@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custody_request_user,access_custody_request_user,model_custody_request,hr.group_hr_user,1,1,1,1
+access_custody_request_manager,access_custody_request_manager,model_custody_request,hr.group_hr_manager,1,1,1,1
+access_custody_asset_user,access_custody_asset_user,model_custody_asset,hr.group_hr_user,1,1,1,1
+access_custody_asset_manager,access_custody_asset_manager,model_custody_asset,hr.group_hr_manager,1,1,1,1
